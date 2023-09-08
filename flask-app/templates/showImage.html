@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Uploaded Image</title>
+</head>
+
+<style>
+    /* Style for the user image */
+    .user-image {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin-right: 8px;
+    }
+
+    .navbar {
+        background-color: rgb(206, 206, 245);
+        overflow: hidden;
+        border-radius: 5px;
+
+    }
+
+    /* Style for the links in the navbar */
+    .navbar a {
+        float: left;
+        font-size: 16px;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    /* Style for the user info container on the right */
+    .user-info {
+        float: right;
+        padding: 14px 16px;
+        color: white;
+    }
+
+    body {
+        /* display: flex; */
+        justify-content: center;
+        align-items: center;
+    }
+
+    .zoom-container {
+        /* margin-top: 250px; */
+        width: 400px;
+        height: 400px;
+        position: relative;
+    }
+
+    .zoom-image {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+    }
+
+    /* Apply the zoom effect */
+    .zoom-container:hover .zoom-image {
+        transform: scale(2.1);
+        /* Increase the scale to zoom in (1.1 for 10% zoom) */
+    }
+</style>
+
+<body onload="fetchImage()">
+    <div class="navbar">
+        <!-- User info container on the right -->
+        <div class="user-info" style="display: flex; align-items: center;">
+            <!-- User image -->
+            <img src="/static/profile.jpg" id="img" alt="User Image" class="user-image">
+            <!-- User name -->
+            <p style="color: black;" id="name"></p>
+            <button onclick="logout()"
+                style="margin-left: 10px; border-radius: 5px; background-color: rgb(255, 161, 127);">Logout</button>
+        </div>
+    </div>
+    <div>
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <div>
+                <h3 style="margin-bottom: 25px; align-items: center;">Uploaded Images</h3>
+                <div class="zoom-container">
+                    <img src="" alt="Image" class="zoom-image" id="image" />
+                </div>
+            </div>
+        </div>
+</body>
+
+<script>
+    const name = document.getElementById('name')
+    name.textContent = window.sessionStorage.getItem('name')
+
+    async function logout() {
+        window.sessionStorage.clear();
+        await fetch('http://localhost:5000/logout');
+        window.location.href = '/login'
+    }
+
+
+    const fetchImage = async () => {
+        const imageElement = document.getElementById('image');
+        try {
+            const imageName = window.sessionStorage.getItem('filename');
+            const imageUrl = `/static/${imageName}`;
+
+            imageElement.src = imageUrl;
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    // Call the fetchImage function to load and display the image
+    fetchImage();
+    const zoomContainer = document.querySelector('.zoom-container');
+    const zoomImage = document.querySelector('.zoom-image');
+    const zoomArea = document.createElement('div');
+    zoomContainer.appendChild(zoomArea);
+
+    zoomContainer.addEventListener('mousemove', (e) => {
+        // Calculate the cursor position within the container
+        const containerRect = zoomContainer.getBoundingClientRect();
+        const x = e.clientX - containerRect.left;
+        const y = e.clientY - containerRect.top;
+
+        // Calculate the position of the zoomed area
+        const zoomAreaSize = 100; // Adjust the size as needed
+        const left = x - zoomAreaSize / 2;
+        const top = y - zoomAreaSize / 2;
+
+        // Set the position of the zoomed area
+        zoomArea.style.left = `${left}px`;
+        zoomArea.style.top = `${top}px`;
+
+        // Update the transform origin to zoom around the cursor
+        zoomImage.style.transformOrigin = `${x}px ${y}px`;
+    });
+</script>
+
+</html>

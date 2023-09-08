@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image List</title>
+</head>
+<title>File Name</title>
+<style>
+    .container{ 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<body onload="getFileName()">
+    <div class="container">
+
+        <div >
+            <h2>Uploaded File Name</h2>
+            <h3 id="image-name">Kindly Upload File</h3>
+        </div>
+    </div>
+</body>
+<script>
+    function getFileName() {
+        const fileName = window.sessionStorage.getItem('filename')
+        const referenceToFileNameTag = document.getElementById('image-name')
+        referenceToFileNameTag.textContent = `Uploaded Image : ${fileName}`;
+    }
+</script>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            width: fit-content;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .google-login-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Adjust the Google Sign-In button styles */
+        .g-signin2 {
+            display: inline-block;
+        }
+
+        .google-btn {
+            cursor: pointer;
+            margin-top: 15px;
+            width: 184px;
+            height: 42px;
+            background-color: #4285f4;
+            border-radius: 2px;
+            box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .25);
+        }
+
+        .google-icon-wrapper {
+            position: absolute;
+            margin-top: 1px;
+            margin-left: 1px;
+            width: 40px;
+            height: 40px;
+            border-radius: 2px;
+            background-color: #fff;
+        }
+
+        .google-icon {
+            position: absolute;
+            margin-top: 11px;
+            margin-left: 11px;
+            width: 18px;
+            height: 18px;
+        }
+
+        .btn-text {
+            padding-left: 15px;
+            padding-right: 5px;
+            /* margin-left: 50px; */
+            float: right;
+            color: #f4f4f4;
+            font-size: 14px;
+            letter-spacing: 0.2px;
+            font-family: "Roboto";
+        }
+
+        .google-btn:hover {
+            box-shadow: 0 0 6px #4285f4;
+        }
+
+        .google-btn:active {
+            background: #1669F2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>Login</h2>
+        <form action="/auth/login" method="POST">
+            <label for="loginEmail">Email:</label>
+            <input type="email" id="loginEmail" name="email" required />
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" name="password" required />
+            <button type="submit">Login</button>
+        </form>
+        <div class="google-btn">
+            <div class="google-icon-wrapper">
+                <img class="google-icon"
+                    src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
+            </div>
+            <a href="/googleauth/"><p class="btn-text"><b>Sign in with Google</b></p></a>
+        </div>
+        <a href="/signup"> Create New Account </a>
+    </div>
+</body>
+
+
+
+<script>
+
+</script>
+</html>
